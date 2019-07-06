@@ -1,0 +1,7 @@
+{
+  "name": "mnemosyne",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Zixia Lu <zixialu@gmail.com>",
+  "license": "MIT"
+}
