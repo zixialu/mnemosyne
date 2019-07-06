@@ -1,0 +1,20 @@
+@import './colors';
+
+.mn-header {
+  min-height: 3rem;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  background-color: $background-secondary-color;
+
+  .mn-brand {
+    flex: 1 1 100%;
+    margin: 0.5em;
+
+    text-align: start;
+    color: $primary-color;
+    font-size: 1.5em;
+  }
+}
