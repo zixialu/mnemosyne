@@ -1,7 +1,7 @@
 .app {
   display: grid;
   grid:
-    [header-start] "header bookmark-list details-pane" auto [header-end]
+    [header-start] "header bookmark-search details-pane" auto [header-end]
     [body-start] "sidebar bookmark-list details-pane" 1fr [body-end]
     / 1fr 2fr minmax(10rem, 1fr);
   gap: 0;
