@@ -1,0 +1,11 @@
+.app {
+  display: grid;
+  grid:
+    [header-start] "header header header" 4rem [header-end]
+    [body-start] "sidebar bookmark-list details-pane" 1fr [body-end]
+    / 1fr 2fr minmax(10rem, 1fr);
+  gap: 0;
+  place-items: stretch;
+
+  height: 100%;
+}

@@ -1,6 +1,8 @@
 @import './colors';
 
 .mn-header {
+  grid-area: header;
+
   min-height: 3rem;
 
   display: flex;
