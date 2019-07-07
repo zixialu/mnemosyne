@@ -7,7 +7,7 @@ class Header extends React.Component {
     return (
       <header className="mn-header">
         <div className="mn-brand">mnemosyne</div>
-        <Button className="login">Login</Button>
+        <Button className="login">+</Button>
       </header>
     );
   }
