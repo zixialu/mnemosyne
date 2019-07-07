@@ -1,0 +1,10 @@
+@import './colors';
+
+.details-pane {
+  background-color: $background-primary-color;
+  color: $text-dark;
+
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -1,0 +1,10 @@
+@import './colors';
+
+.sidebar {
+  background-color: $background-secondary-light-color;
+  color: $text-white;
+
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
