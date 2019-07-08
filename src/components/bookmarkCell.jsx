@@ -4,7 +4,7 @@ import '../styles/bookmarkCell.scss'
 function BookmarkCell({ bookmark: { name, uri, tags } }) {
   return (
     <div className="bookmark-cell">
-      <a href={uri}>
+      <a href={uri} target="_blank" rel="noopener noreferrer">
         <span className="bookmark-title">{name}</span>
         <span className="bookmark-uri">{uri}</span>
       </a>
