@@ -1,11 +1,13 @@
 import React from 'react';
 import '../styles/bookmarkList.scss';
+import BookmarkCell from './bookmarkCell';
 
-function BookmarkList(props) {
+function BookmarkList({ bookmarks }) {
   return (
     <main className="bookmark-list">
-      Bookmark List
-      {JSON.stringify(props.bookmarks)}
+      {bookmarks && bookmarks.map(bookmark => (
+        <BookmarkCell bookmark={bookmark} key={bookmark.id} />
+      ))}
     </main>
   );
 }
