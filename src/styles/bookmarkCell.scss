@@ -5,12 +5,19 @@
   margin: 0.25em;
   border: 1px solid $background-secondary-light-color;
 
+  a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+  }
+
   .bookmark-title {
     font-weight: 700;
     font-size: 1.25em;
   }
 
   .bookmark-uri {
+    padding: 0 0.5em;
+
     color: $text-dark-muted;
   }
 
