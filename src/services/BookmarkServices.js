@@ -1,4 +1,4 @@
-function get() {
+function getBookmarks() {
   // TODO: Replace this with an actual request
   const data = [
     {
@@ -23,4 +23,4 @@ function get() {
   });
 }
 
-export default { get };
+export default { getBookmarks };
