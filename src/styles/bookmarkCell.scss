@@ -29,9 +29,9 @@
 
   .bookmark-tag {
     background-color: $tab-highlight-color;
-    border-radius: 0.75em;
+    border-radius: 1em; /* This is larger than 50% height, it'll scale down */
 
-    padding: 0.25em 0.5em;
+    padding: 0.25em 0.625em;
     margin-inline-end: 0.25em;
   }
 }
