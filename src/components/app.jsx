@@ -28,10 +28,13 @@ function App() {
   // Filter bookmarks
   useEffect(() => {
     function filterBookmarks() {
+      const lowerCaseSearch = search.toLowerCase()
       setFilteredBookmarks(bookmarks && bookmarks.filter(bookmark => (
         bookmark.name
           .toLowerCase()
-          .includes(search.toLowerCase())
+          .includes(lowerCaseSearch)
+        || bookmark.tags
+          .includes(lowerCaseSearch)
       )));
     }
     filterBookmarks();
