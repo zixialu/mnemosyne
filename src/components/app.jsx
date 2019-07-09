@@ -34,6 +34,7 @@ function App() {
           .toLowerCase()
           .includes(lowerCaseSearch)
         || bookmark.tags
+          .map(tag => tag.toLowerCase())
           .includes(lowerCaseSearch)
       )));
     }
