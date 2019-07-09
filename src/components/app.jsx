@@ -9,7 +9,10 @@ import '../styles/app.scss';
 
 function App() {
   const [bookmarks, setBookmarks] = useState(null);
+  const [search, setSearch] = useState('');
+  const [filteredBookmarks, setFilteredBookmarks] = useState(null);
 
+  // Get bookmarks
   useEffect(() => {
     let ignore = false;
 
@@ -22,12 +25,23 @@ function App() {
     return () => { ignore = true; };
   }, [])
 
+  // Filter bookmarks
+  useEffect(() => {
+    function filterBookmarks() {
+      setFilteredBookmarks(bookmarks && bookmarks.filter(bookmark => (
+        bookmark.name
+          .includes(search)
+      )));
+    }
+    filterBookmarks();
+  }, [bookmarks, search])
+
   return (
     <div className="app">
       <Header />
       <Sidebar />
-      <BookmarkSearch />
-      <BookmarkList bookmarks={bookmarks} />
+      <BookmarkSearch update={setSearch} />
+      <BookmarkList bookmarks={filteredBookmarks} />
       <DetailsPane />
     </div>
   );

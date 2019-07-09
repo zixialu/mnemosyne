@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/bookmarkSearch.scss';
 
-function BookmarkSearch() {
+function BookmarkSearch({ update }) {
+  const [searchText, setSearchText] = useState('');
+
+  const handleInputChange = ({ target: { value } }) => {
+    setSearchText(value);
+    update(value);
+  }
+
   return (
     <div className="bookmark-search">
-      Search Bookmarks
+      <input
+        className="search-input"
+        type="text"
+        value={searchText}
+        onChange={handleInputChange}
+        placeholder="Search"
+      />
     </div>
   );
 }

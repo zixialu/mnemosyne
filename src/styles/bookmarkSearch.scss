@@ -3,8 +3,17 @@
 .bookmark-search {
   grid-area: bookmark-search;
 
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: stretch;
+
   background-color: $background-primary-color;
   color: $text-dark;
 
-  text-align: center;
+  .search-input {
+    flex: 1;
+
+    font-size: 1.25rem;
+    margin: 0.5em;
+  }
 }
