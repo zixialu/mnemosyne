@@ -30,7 +30,8 @@ function App() {
     function filterBookmarks() {
       setFilteredBookmarks(bookmarks && bookmarks.filter(bookmark => (
         bookmark.name
-          .includes(search)
+          .toLowerCase()
+          .includes(search.toLowerCase())
       )));
     }
     filterBookmarks();
