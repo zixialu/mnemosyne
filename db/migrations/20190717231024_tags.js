@@ -1,17 +1,18 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable('tags', (table) => {
-    table
-      .increments('userId');
-    table
-      .string('name')
+    table.increments('user_id');
+
+    table.string('name')
       .notNullable();
-    table
-      .integer('parent')
+
+    table.integer('parent')
       .unsigned()
-      .references('userId')
+      .references('user_id')
       .inTable('tags')
       .onDelete('cascade');
+
+    table.timestamps(true, true);
   })
 };
 
