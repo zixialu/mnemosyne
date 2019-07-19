@@ -11,11 +11,11 @@ exports.up = function (knex) {
 
     table.timestamps(true, true);
 
-    table.foreign('tag_id')
-      .references('tags.id');
-
     table.foreign('bookmark_id')
       .references('bookmarks.id');
+
+    table.foreign('tag_id')
+      .references('tags.id');
   });
 };
 
