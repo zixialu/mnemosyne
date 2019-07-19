@@ -9,6 +9,8 @@ exports.up = function (knex) {
     table.integer('tag_id')
       .unsigned();
 
+    table.timestamps(true, true);
+
     table.foreign('tag_id')
       .references('tags.id');
 
