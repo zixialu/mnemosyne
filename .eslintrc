@@ -3,5 +3,7 @@
     "airbnb"
   ],
   "plugins": [],
-  "rules": {},
+  "rules": {
+    "no-use-before-define": "off",
+  },
 }
