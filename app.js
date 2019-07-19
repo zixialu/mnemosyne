@@ -8,7 +8,8 @@ const knexConfig = require('./knexfile');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const bookmarksRouter = require('./routes/bookmarks');
+const tagsRouter = require('./routes/tags');
 
 // Set up knex
 const { DB_ENV: dbEnv } = process.env;
@@ -23,7 +24,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/bookmarks', bookmarksRouter(pg));
+app.use('/tags', tagsRouter(pg));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
