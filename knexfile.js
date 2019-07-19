@@ -8,10 +8,10 @@ module.exports = {
     client: 'pg',
     connection: 'postgres://localhost:5432/mnemosyne',
     migrations: {
-      directory: path.join(BASE_PATH, 'migrations')
+      directory: path.join(BASE_PATH, 'migrations'),
     },
     seeds: {
-      directory: path.join(BASE_PATH, 'seeds')
+      directory: path.join(BASE_PATH, 'seeds'),
     },
   },
 
