@@ -5,13 +5,15 @@ exports.up = knex => knex.schema.dropTableIfExists('bookmarks_tags')
       table.increments('id');
 
       table.integer('bookmark_id')
-        .unsigned();
+        .unsigned()
+        .notNullable();
 
       table.foreign('bookmark_id')
         .references('bookmarks.id');
 
       table.integer('tag_id')
-        .unsigned();
+        .unsigned()
+        .notNullable();
 
       table.foreign('tag_id')
         .references('tags.id');
