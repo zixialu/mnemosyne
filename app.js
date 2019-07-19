@@ -3,17 +3,19 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
 const knex = require('knex');
 const knexConfig = require('./knexfile');
-require('dotenv').config();
 
-const indexRouter = require('./routes/index');
-const bookmarksRouter = require('./routes/bookmarks');
-const tagsRouter = require('./routes/tags');
+require('dotenv').config();
 
 // Set up knex
 const { DB_ENV: dbEnv } = process.env;
 const pg = knex(knexConfig[dbEnv]);
+
+const indexRouter = require('./routes/index');
+const bookmarksRouter = require('./routes/bookmarks')(pg);
+const tagsRouter = require('./routes/tags')(pg);
 
 const app = express();
 
@@ -24,8 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/bookmarks', bookmarksRouter(pg));
-app.use('/tags', tagsRouter(pg));
+app.use('/bookmarks', bookmarksRouter);
+app.use('/tags', tagsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
