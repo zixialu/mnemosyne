@@ -12,6 +12,9 @@ exports.up = knex => knex.schema.dropTableIfExists('users')
         .unique()
         .notNullable();
 
+      table.string('password_hash')
+        .notNullable();
+
       table.timestamps(true, true);
     })
   ));
