@@ -1,23 +1,19 @@
 
-exports.up = function (knex) {
-  return knex.schema.dropTableIfExists('bookmarks')
-    .then(() => (
-      knex.schema.createTable('bookmarks', (table) => {
-        table.increments('id');
+exports.up = knex => knex.schema.dropTableIfExists('bookmarks')
+  .then(() => (
+    knex.schema.createTable('bookmarks', (table) => {
+      table.increments('id');
 
-        table.string('name')
-          .notNullable();
+      table.string('name')
+        .notNullable();
 
-        table.string('uri')
-          .notNullable();
+      table.string('uri')
+        .notNullable();
 
-        table.text('description');
+      table.text('description');
 
-        table.timestamps(true, true);
-      })
-    ));
-};
+      table.timestamps(true, true);
+    })
+  ));
 
-exports.down = function (knex) {
-  return knex.schema.dropTable('bookmarks');
-};
+exports.down = knex => knex.schema.dropTable('bookmarks');
