@@ -6,16 +6,16 @@ exports.up = function (knex) {
     table.integer('bookmark_id')
       .unsigned();
 
-    table.integer('tag_id')
-      .unsigned();
-
-    table.timestamps(true, true);
-
     table.foreign('bookmark_id')
       .references('bookmarks.id');
 
+    table.integer('tag_id')
+      .unsigned();
+
     table.foreign('tag_id')
       .references('tags.id');
+
+    table.timestamps(true, true);
   });
 };
 
