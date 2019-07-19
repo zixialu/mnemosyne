@@ -1,19 +1,19 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable('tags', (table) => {
-    table.increments('user_id');
+    table.increments('id');
 
     table.string('name')
       .notNullable();
 
-    table.integer('parent')
-      .unsigned()
-      .references('user_id')
-      .inTable('tags')
-      .onDelete('cascade');
+    table.integer('parent_id')
+      .unsigned();
+
+    table.foreign('parent_id')
+      .references('tags.id');
 
     table.timestamps(true, true);
-  })
+  });
 };
 
 exports.down = function (knex) {

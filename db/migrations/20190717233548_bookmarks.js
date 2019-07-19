@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable('bookmarks', (table) => {
-    table.increments('bookmark_id');
+    table.increments('id');
 
     table.string('name')
       .notNullable();
@@ -12,7 +12,7 @@ exports.up = function (knex) {
     table.text('description');
 
     table.timestamps(true, true);
-  })
+  });
 };
 
 exports.down = function (knex) {
