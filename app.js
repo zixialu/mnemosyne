@@ -16,6 +16,7 @@ const pg = knex(knexConfig[dbEnv]);
 const indexRouter = require('./routes/index');
 const bookmarksRouter = require('./routes/bookmarks')(pg);
 const tagsRouter = require('./routes/tags')(pg);
+const usersRouter = require('./routes/users')(pg);
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/bookmarks', bookmarksRouter);
 app.use('/tags', tagsRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
