@@ -1,13 +1,12 @@
 const Koa = require('koa');
 const knex = require('knex');
+const knexConfig = require('./knexfile');
 require('dotenv').config();
 
 const app = module.exports = new Koa();
 
-const pg = knex({
-  client: 'pg',
-  connection: process.env.PG_CONNECTION_STRING,
-  // searchPath: ['knex', 'public'],
-});
+// Set up knex
+const { DB_ENV: dbEnv } = process.env;
+const pg = knex(knexConfig[dbEnv]);
 
 app.listen(process.env.PORT || 3000);
