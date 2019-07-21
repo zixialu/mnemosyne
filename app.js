@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   // Clean the error for production
   const { message } = err;
   const error = req.app.get('env') === 'development' ? err : { message };
