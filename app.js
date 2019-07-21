@@ -37,6 +37,8 @@ app.use((req, res, next) => {
 });
 
 // error handler
+// error-handling middleware always takes 4 args to identify as error handlers
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   // Clean the error for production
   const { message } = err;

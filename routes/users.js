@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const express = require('express');
 const UserService = require('../services/UserService');
 
@@ -13,7 +14,7 @@ module.exports = (knex) => {
         req.user = foundUser;
         return next();
       }
-      return next(new Error('failed to load user'));
+      return next(createError(404, 'User not found'));
     } catch (err) {
       console.error(err);
       return next(err);
