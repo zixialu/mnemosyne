@@ -15,14 +15,25 @@ module.exports = (knex) => {
       }
       return next(new Error('failed to load user'));
     } catch (err) {
+      console.error(err);
+      return next(err);
+    }
+  });
+
+  // POST /users
+  router.post('/', async (req, res, next) => {
+    try {
+      const { username, email, password } = req.body;
+      const createdUser = await User.create({ username, email, password });
+      return res.json(createdUser);
+    } catch (err) {
+      console.error(err);
       return next(err);
     }
   });
 
   // GET /users/:userId
-  router.get('/:userId', (req, res) => {
-    res.json(req.user);
-  });
+  router.get('/:userId', (req, res) => res.json(req.user));
 
   return router;
 };
