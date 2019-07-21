@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import BookmarkService from '../services/BookmarkServices';
-import Header from './header';
-import Sidebar from './sidebar';
-import BookmarkSearch from './bookmarkSearch';
-import BookmarkList from './bookmarkList';
-import DetailsPane from './detailsPane';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import BookmarkSearch from './BookmarkSearch';
+import BookmarkList from './BookmarkList';
+import DetailsPane from './DetailsPane';
 import '../styles/app.scss';
 
 function App() {
