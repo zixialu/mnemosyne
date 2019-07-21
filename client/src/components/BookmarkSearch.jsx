@@ -6,6 +6,8 @@ function BookmarkSearch({ update }) {
 
   const handleInputChange = ({ target: { value } }) => {
     setSearchText(value);
+
+    // TODO: set debounce
     update(value);
   }
 
