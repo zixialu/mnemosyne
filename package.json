@@ -3,6 +3,9 @@
   "author": "Zixia Lu <zixialu@gmail.com>",
   "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  },
   "scripts": {
     "start": "concurrently \"yarn server\" \"yarn client\"",
     "dev": "concurrently \"yarn server-dev\" \"yarn client\"",
