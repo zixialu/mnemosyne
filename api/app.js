@@ -7,7 +7,7 @@ const logger = require('morgan');
 const knex = require('knex');
 const knexConfig = require('./knexfile');
 
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 // Set up knex
 const { DB_ENV: dbEnv } = process.env;
