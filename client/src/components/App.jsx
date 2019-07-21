@@ -5,7 +5,9 @@ import '../styles/app.scss';
 
 function App() {
   return (
-    <Mnemosyne />
+    <Router>
+      <Route path="/" exact component={Mnemosyne} />
+    </Router>
   )
 }
 
