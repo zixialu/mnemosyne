@@ -3,10 +3,10 @@
 .details-pane {
   grid-area: details-pane;
 
-  background-color: $background-primary-color;
+  background-color: $background-light;
   color: $text-dark;
 
   text-align: center;
 
-  border-left: 1px solid $background-secondary-light-color;
+  border-left: 1px solid $background-dark;
 }

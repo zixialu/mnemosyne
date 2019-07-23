@@ -1,12 +1,18 @@
-$primary-color: #75BC5C;
-$danger-color: #EB4030;
+// Colours
+$color-accent: #e54b4b;
+$color-primary: #3c485e;
+$color-primary-dark: #2d364e;
+$color-primary-light: #a7bbc3;
+$color-off-white: #e9e8d4;
+$color-white: #f7f5ee;
 
-$background-primary-color: #FAFAFA;
-$background-secondary-color: #2F303D;
-$background-secondary-light-color: #434452;
+// Mapping
+$background-dark: $color-primary;
+$background-darker: $color-primary-dark;
+$background-light: $color-white;
+$background-highlight: $color-primary-light;
+$background-accent: $color-accent;
 
-$text-white: #FAFAFA;
-$text-dark: #333333;
-$text-dark-muted: #555555;
-
-$tab-highlight-color: #99AABB;
+$text-dark: $color-primary-dark;
+$text-light: $color-off-white;
+$text-accent: $color-accent;
