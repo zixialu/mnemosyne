@@ -2,16 +2,19 @@
 $color-accent: #e54b4b;
 $color-primary: #3c485e;
 $color-primary-dark: #323e56;
-$color-primary-light: #8c9fac;
-$color-off-white: #eaedee;
+$color-primary-light: #9babb5;
+$color-off-white: #f0f2f3;
 $color-white: #fff;
 
 // Mapping
 $background-dark: $color-primary;
 $background-darker: $color-primary-dark;
-$background-light: $color-white;
-$background-highlight: $color-primary-light;
+$background-light: $color-off-white;
+$background-lighter: $color-white;
+$background-secondary: $color-primary-light;
 $background-accent: $color-accent;
+
+$border-light: $color-primary-light;
 
 $text-dark: $color-primary-dark;
 $text-light: $color-white;
