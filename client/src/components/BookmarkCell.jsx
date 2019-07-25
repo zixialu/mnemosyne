@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/bookmarkCell.scss'
 
-function BookmarkCell({ bookmark: { name, uri, tags } }) {
+function BookmarkCell({ bookmark: { name, uri, tags }, onClick }) {
   return (
-    <div className="bookmark-cell">
+    <div className="bookmark-cell" onClick={onClick}>
       <a href={uri} target="_blank" rel="noopener noreferrer">
         <span className="bookmark-title">{name}</span>
         <span className="bookmark-uri">{uri}</span>

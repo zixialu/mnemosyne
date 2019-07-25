@@ -11,6 +11,7 @@ function Mnemosyne() {
   const [bookmarks, setBookmarks] = useState(null);
   const [search, setSearch] = useState('');
   const [filteredBookmarks, setFilteredBookmarks] = useState(null);
+  const [selectedBookmark, setSelectedBookmark] = useState(null);
 
   // Get bookmarks
   useEffect(() => {
@@ -46,8 +47,10 @@ function Mnemosyne() {
       <Header />
       <Sidebar />
       <BookmarkSearch update={setSearch} />
-      <BookmarkList bookmarks={filteredBookmarks} />
-      <DetailsPane />
+      <BookmarkList
+        bookmarks={filteredBookmarks}
+        selectBookmark={setSelectedBookmark} />
+      <DetailsPane bookmark={selectedBookmark} />
     </div>
   );
 }
