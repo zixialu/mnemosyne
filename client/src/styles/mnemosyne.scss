@@ -5,7 +5,7 @@
   grid:
     [header-start] "header bookmark-search details-pane" auto [header-end]
     [body-start] "sidebar bookmark-list details-pane" 1fr [body-end]
-    / 1fr 2fr minmax(10rem, 1fr);
+    / 20rem 1fr auto;
   gap: 0;
   place-items: stretch;
 
