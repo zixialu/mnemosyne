@@ -3,6 +3,8 @@
 .details-pane {
   grid-area: details-pane;
 
+  box-shadow: 0px 0px 10px 0px #3c485e80;
+
   background-color: $background-lighter;
   color: $text-dark;
 
