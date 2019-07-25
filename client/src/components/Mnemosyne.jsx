@@ -42,6 +42,8 @@ function Mnemosyne() {
     filterBookmarks();
   }, [bookmarks, search])
 
+  const closeDetailsPane = () => setSelectedBookmark(null);
+
   return (
     <div className="mnemosyne">
       <Header />
@@ -50,7 +52,7 @@ function Mnemosyne() {
       <BookmarkList
         bookmarks={filteredBookmarks}
         selectBookmark={setSelectedBookmark} />
-      <DetailsPane bookmark={selectedBookmark} />
+      <DetailsPane bookmark={selectedBookmark} close={closeDetailsPane} />
     </div>
   );
 }

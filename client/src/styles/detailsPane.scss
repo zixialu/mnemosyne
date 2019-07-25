@@ -22,3 +22,14 @@ $pane-width: 30rem;
 .slide-enter-done {
   width: $pane-width;
 }
+
+.slide-exit {
+  width: $pane-width;
+}
+.slide-exit-active {
+  width: 0;
+  transition: width 200ms;
+}
+.slide-exit-done {
+  width: 0;
+}
