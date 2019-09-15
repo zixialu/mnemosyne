@@ -6,7 +6,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost:5432/mnemosyne',
+    connection: `postgres://${process.env.DB_URL}`,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations'),
     },

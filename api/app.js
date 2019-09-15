@@ -4,10 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+require('dotenv').config({ path: '../.env' });
+
 const knex = require('knex');
 const knexConfig = require('./knexfile');
-
-require('dotenv').config({ path: '../.env' });
 
 // Set up knex
 const { DB_ENV: dbEnv } = process.env;
