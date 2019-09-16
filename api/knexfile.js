@@ -1,3 +1,5 @@
+require('dotenv').config({ path: '../.env' });
+
 const path = require('path');
 
 const BASE_PATH = path.join(__dirname, 'db');
