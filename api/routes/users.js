@@ -35,9 +35,5 @@ module.exports = (knex) => {
     }
   });
 
-  // GET /users/:userId
-  // Get user by id
-  router.get('/:userId', (req, res) => res.json(req.user));
-
   return router;
 };
