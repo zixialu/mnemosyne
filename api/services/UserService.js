@@ -1,7 +1,10 @@
+const bcrypt = require('bcrypt');
+
+const { SALT_ROUNDS } = process.env;
+
 module.exports = knex => ({
   async create({ username, email, password }) {
-    // TODO: Hash password
-    const passwordHash = password;
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
     return knex('users')
       .insert({
@@ -17,9 +20,16 @@ module.exports = knex => ({
       .where({ id });
   },
 
+  async verify(id, password) {
+    const recordedHash = await knex('users')
+      .select('password_hash')
+      .where({ id });
+
+    return bcrypt.compare(password, recordedHash);
+  },
+
   async changePassword({ id, password }) {
-    // TODO: Hash password
-    const passwordHash = password;
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
     return knex('users')
       .where({ id })
