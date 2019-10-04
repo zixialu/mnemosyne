@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const jwt = require('express-jwt');
 
 require('dotenv').config({ path: '../.env' });
 
@@ -10,8 +11,10 @@ const knex = require('knex');
 const knexConfig = require('./knexfile');
 
 // Set up knex
-const { DB_ENV: dbEnv } = process.env;
-const pg = knex(knexConfig[dbEnv]);
+const { DB_ENV, JWT_SECRET } = process.env;
+const pg = knex(knexConfig[DB_ENV]);
+
+const { getUserFromJWT } = require('./routes/middleware/auth')(pg);
 
 const indexRouter = require('./routes/index');
 const bookmarksRouter = require('./routes/bookmarks')(pg);
@@ -25,6 +28,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const getTokenFromHeader = (req) => {
+  const { authorization } = req.headers;
+  if (!authorization || !authorization.includes('Bearer ')) {
+    // TODO: Handle failed auth
+    return undefined;
+  }
+  const [token] = authorization.split('Bearer ');
+  return token;
+};
+app.use(jwt({
+  secret: JWT_SECRET,
+  userProperty: 'jwt',
+  getToken: getTokenFromHeader,
+}));
+// TODO: Make sure this needs to be here and we need ALL our routes to be secured
+app.use(getUserFromJWT);
 
 app.use('/', indexRouter);
 app.use('/bookmarks', bookmarksRouter);

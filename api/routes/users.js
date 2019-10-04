@@ -1,26 +1,12 @@
 const createError = require('http-errors');
 const express = require('express');
+
 const UserService = require('../services/UserService');
 
 const router = express.Router();
 
 module.exports = (knex) => {
   const User = UserService(knex);
-
-  // Handle param userId
-  router.param('userId', async (req, res, next, userId) => {
-    try {
-      const foundUser = await User.get(userId);
-      if (foundUser) {
-        req.user = foundUser;
-        return next();
-      }
-      return next(createError(404, 'User not found'));
-    } catch (err) {
-      console.error(err);
-      return next(err);
-    }
-  });
 
   // POST /users
   // Create new user
@@ -33,6 +19,24 @@ module.exports = (knex) => {
       console.error(err);
       return next(err);
     }
+  });
+
+  router.post('/login', async (req, res, next) => {
+    const { username, password } = req.body;
+    const userRecord = await User.findOne(username);
+    if (!userRecord) {
+      // TODO: Handle failed login
+    }
+    const verified = await User.verify(userRecord.id, password);
+    if (!verified) {
+      // TODO: Handle failed login
+    }
+
+    return {
+      username: userRecord.username,
+      email: userRecord.email,
+      token: User.generateJWT(userRecord),
+    };
   });
 
   return router;
