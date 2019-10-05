@@ -60,6 +60,12 @@ app.use((req, res, next) => {
 // error-handling middleware always takes 4 args to identify as error handlers
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  // Handle invalid JWT
+  if (err.name === 'UnauthorizedError') {
+    // TODO: Redirect to login?
+    res.status(401).send('Invalid token');
+  }
+
   // Clean the error for production
   const { message } = err;
   const error = req.app.get('env') === 'development' ? err : { message };
