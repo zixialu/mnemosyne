@@ -40,7 +40,6 @@ const getTokenFromHeader = (req) => {
 };
 app.use(jwt({
   secret: JWT_SECRET,
-  userProperty: 'jwt',
   getToken: getTokenFromHeader,
 }));
 // TODO: Make sure this needs to be here and we need ALL our routes to be secured

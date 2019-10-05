@@ -5,8 +5,8 @@ module.exports = (knex) => {
 
   return {
     async getUserFromJWT(req, res, next) {
-      const { jwt } = req;
-      const userRecord = await User.get(jwt.id);
+      const { user } = req;
+      const userRecord = await User.get(user.id);
       if (!userRecord) {
         return res.status(401).end('User not found');
       }
