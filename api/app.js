@@ -29,18 +29,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const getTokenFromHeader = (req) => {
+const getToken = (req) => {
   const { authorization } = req.headers;
-  if (!authorization || !authorization.includes('Bearer ')) {
-    // TODO: Handle failed auth
-    return undefined;
+  if (authorization && authorization.split(' ')[0] === 'Bearer') {
+    return authorization.split(' ')[1];
   }
-  const [token] = authorization.split('Bearer ');
-  return token;
+  if (req.query && req.query.token) {
+    return req.query.token;
+  }
+  return null;
 };
 app.use(jwt({
   secret: JWT_SECRET,
-  getToken: getTokenFromHeader,
+  getToken,
 }));
 // TODO: Make sure this needs to be here and we need ALL our routes to be secured
 app.use(getUserFromJWT);
@@ -62,7 +63,6 @@ app.use((err, req, res, next) => {
   // Clean the error for production
   const { message } = err;
   const error = req.app.get('env') === 'development' ? err : { message };
-
   // Return the error
   res.status(err.status || 500)
     .json(error);
