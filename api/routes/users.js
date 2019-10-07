@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const UserService = require('../services/UserService');
+const SessionService = require('../services/SessionService');
 
 const router = express.Router();
 
