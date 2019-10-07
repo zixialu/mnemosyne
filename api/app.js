@@ -1,8 +1,10 @@
 const createError = require('http-errors');
 const express = require('express');
+const session = require('express-session');
+const KnexSessionStore = require('connect-session-knex')(session);
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
 
 require('dotenv').config({ path: '../.env' });
 
@@ -10,8 +12,15 @@ const knex = require('knex');
 const knexConfig = require('./knexfile');
 
 // Set up knex
-const { DB_ENV: dbEnv } = process.env;
-const pg = knex(knexConfig[dbEnv]);
+const { DB_ENV, SESSION_SECRET } = process.env;
+const pg = knex(knexConfig[DB_ENV]);
+
+// Knex session store
+const store = new KnexSessionStore({
+  knex: pg,
+  tablename: 'sessions', // optional. Defaults to 'sessions'
+  createTable: true,
+});
 
 const indexRouter = require('./routes/index');
 const bookmarksRouter = require('./routes/bookmarks')(pg);
@@ -23,8 +32,18 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  cookie: {
+    maxAge: 2629800000, // 1 Month
+    sameSite: true,
+    secure: true,
+  },
+  rolling: true,
+  saveUninitialized: false,
+  secret: SESSION_SECRET,
+  store,
+}));
 
 app.use('/', indexRouter);
 app.use('/bookmarks', bookmarksRouter);
