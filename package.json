@@ -12,6 +12,7 @@
     "dev-server": "nodemon --ignore client/ ./bin/www",
     "server": "node start-api.js",
     "server-dev": "node start-api-dev.js",
-    "client": "node start-client.js"
+    "client": "node start-client.js",
+    "install:all": "cd api && pwd && yarn && cd ../client && pwd && yarn"
   }
 }
