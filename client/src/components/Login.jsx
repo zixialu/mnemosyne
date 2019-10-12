@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import constants from '../constants';
 import Button from './Button';
 import '../styles/login.scss'
 
@@ -23,8 +24,13 @@ function Login() {
     setAttemptingLogin(true);
 
     try {
-      // TODO: Login
+      const { data: user } = await axios.post(
+        `${constants.API_URL}/users/login`,
+        { username, password },
+      );
+      // TODO: Set login in redux
     } catch (err) {
+      // TODO: Indicate failed login and prompt retry
       alert(err.message);
     }
   }
