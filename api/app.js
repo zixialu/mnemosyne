@@ -5,20 +5,21 @@ const KnexSessionStore = require('connect-session-knex')(session);
 const path = require('path');
 const logger = require('morgan');
 
-
 require('dotenv').config({ path: '../.env' });
 
 const knex = require('knex');
 const knexConfig = require('./knexfile');
 
+const sessionMiddleware = require('./middleware/session');
+
 // Set up knex
 const { DB_ENV, SESSION_SECRET } = process.env;
 const pg = knex(knexConfig[DB_ENV]);
 
-// Knex session store
+// Session store
 const store = new KnexSessionStore({
   knex: pg,
-  tablename: 'sessions', // optional. Defaults to 'sessions'
+  tablename: 'sessions',
   createTable: true,
 });
 
@@ -45,6 +46,7 @@ app.use(session({
   secret: SESSION_SECRET,
   store,
 }));
+app.use(sessionMiddleware.clearInvalidSession);
 
 app.use('/', indexRouter);
 app.use('/bookmarks', bookmarksRouter);
