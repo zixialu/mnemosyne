@@ -4,14 +4,14 @@ const { SALT_ROUNDS } = process.env;
 
 module.exports = knex => ({
   async create({ username, email, password }) {
-    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+    const passwordHash = await bcrypt.hash(password, Number(SALT_ROUNDS));
 
     return knex('users')
       .insert({
         username,
         email,
         password_hash: passwordHash,
-      });
+      }, ['id', 'username', 'email']);
   },
 
   async get(id) {
@@ -46,7 +46,7 @@ module.exports = knex => ({
   },
 
   async changePassword({ id, password }) {
-    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+    const passwordHash = await bcrypt.hash(password, Number(SALT_ROUNDS));
 
     return knex('users')
       .where({ id })

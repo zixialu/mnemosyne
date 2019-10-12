@@ -4,7 +4,7 @@ module.exports = {
   // when you stop your express server after login, your cookie still remains
   // saved in the browser.
   clearInvalidSession(req, res, next) {
-    if (req.cookies.sid && !req.session.user) {
+    if (req.cookies && req.cookies.sid && !req.session.user) {
       res.clearCookie('mnemosyne.sid');
     }
     return next();
