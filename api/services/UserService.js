@@ -6,12 +6,13 @@ module.exports = knex => ({
   async create({ username, email, password }) {
     const passwordHash = await bcrypt.hash(password, Number(SALT_ROUNDS));
 
-    return knex('users')
+    const [createdUser] = await knex('users')
       .insert({
         username,
         email,
         password_hash: passwordHash,
       }, ['id', 'username', 'email']);
+    return createdUser;
   },
 
   async get(id) {
