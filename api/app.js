@@ -13,8 +13,8 @@ const knexConfig = require('./knexfile');
 const sessionMiddleware = require('./middleware/session');
 
 // Set up knex
-const { DB_ENV, SESSION_SECRET } = process.env;
-const pg = knex(knexConfig[DB_ENV]);
+const { ENV, SESSION_SECRET } = process.env;
+const pg = knex(knexConfig[ENV]);
 
 // Session store
 const store = new KnexSessionStore({
@@ -38,7 +38,7 @@ app.use(session({
   cookie: {
     maxAge: 2629800000, // 1 Month
     sameSite: true,
-    secure: true,
+    secure: ENV === 'production',
   },
   name: 'sid',
   resave: false,
