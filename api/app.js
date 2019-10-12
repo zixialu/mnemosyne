@@ -41,6 +41,7 @@ app.use(session({
     secure: true,
   },
   name: 'sid',
+  resave: false,
   rolling: true,
   saveUninitialized: false,
   secret: SESSION_SECRET,
