@@ -30,17 +30,19 @@ module.exports = knex => ({
   },
 
   async verify(username, password) {
-    const recordedHash = await knex('users')
+    const foundUser = await knex('users')
       .select('id', 'username', 'email', 'password_hash')
       .where({ username })
       .first();
+    if (!foundUser) return false;
+    const recordedHash = foundUser.password_hash;
 
     const isValid = await bcrypt.compare(password, recordedHash);
     if (isValid) {
       return {
-        id: recordedHash.id,
-        username,
-        email: recordedHash.email,
+        id: foundUser.id,
+        username: foundUser.username,
+        email: foundUser.email,
       };
     }
     return false;

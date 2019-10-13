@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const session = require('express-session');
+const cors = require('cors');
 const KnexSessionStore = require('connect-session-knex')(session);
 const path = require('path');
 const logger = require('morgan');
@@ -13,7 +14,7 @@ const knexConfig = require('./knexfile');
 const sessionMiddleware = require('./middleware/session');
 
 // Set up knex
-const { ENV, SESSION_SECRET } = process.env;
+const { ENV, SESSION_SECRET, CLIENT_URL } = process.env;
 const pg = knex(knexConfig[ENV]);
 
 // Session store
@@ -34,10 +35,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors({
+  origin: CLIENT_URL,
+  optionsSuccessStatus: 200,
+}));
 app.use(session({
   cookie: {
     maxAge: 2629800000, // 1 Month
-    sameSite: true,
+    sameSite: ENV === 'production' || 'none',
     secure: ENV === 'production',
   },
   name: 'sid',
@@ -47,6 +52,9 @@ app.use(session({
   secret: SESSION_SECRET,
   store,
 }));
+// FIXME: Figure out how to disable strict samesite for development
+// Is this relevant? https://www.chromestatus.com/feature/5633521622188032
+app.use(sessionMiddleware.setSameSessionNone);
 app.use(sessionMiddleware.clearInvalidSession);
 
 app.use('/', indexRouter);

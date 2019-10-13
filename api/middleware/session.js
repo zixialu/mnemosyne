@@ -10,6 +10,11 @@ module.exports = {
     return next();
   },
 
+  setSameSessionNone(req, res, next) {
+    req.session.cookie.sameSite = 'none';
+    return next();
+  },
+
   verifySession(req, res, next) {
     if (req.cookies.sid && req.session.user) {
       return next();

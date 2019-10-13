@@ -35,6 +35,10 @@ module.exports = (knex) => {
     }
   });
 
+  router.get('/echo-session', async (req, res, next) => {
+    res.status(200).json(req.session);
+  });
+
   // GET /users/:userId
   // Get user by id
   router.get('/:userId', (req, res) => res.json(req.user));

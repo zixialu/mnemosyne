@@ -27,15 +27,26 @@ function Login() {
     setAttemptingLogin(true);
 
     try {
-      const { data: user } = await axios.post(
+      const { data } = await axios.post(
         `${constants.API_URL}/users/login`,
         { username, password },
       );
       // TODO: Set session cookie in redux
+      console.log(data);
+      // this.props.setSession(...)
     } catch (err) {
       // TODO: Indicate failed login and prompt retry
       alert(err.message);
+    } finally {
+      setAttemptingLogin(false);
     }
+  }
+
+  const echoSession = async (event) => {
+    const { data } = await axios.get(
+      `${constants.API_URL}/users/echo-session`,
+    );
+    alert(JSON.stringify(data));
   }
 
   return (
@@ -47,9 +58,9 @@ function Login() {
         : (
           <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <label for="username">Username</label>
+              <label htmlFor="username">Username</label>
               <input
-                autofocus
+                autoFocus
                 type="text"
                 id="username"
                 placeholder="Username"
@@ -59,7 +70,7 @@ function Login() {
             </div>
 
             <div className="input-group">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
@@ -76,12 +87,16 @@ function Login() {
               Login
         </Button>
           </form>
-        )}
+        )
+      }
+      <button onClick={echoSession}>echo session</button>
     </div>
   )
 }
 
-const mapStateToProps = { getSession };
+const mapStateToProps = state => ({
+  session: getSession(state),
+});
 
 const mapDispatchToState = { setSession };
 
