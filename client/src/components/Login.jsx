@@ -28,7 +28,7 @@ function Login() {
         `${constants.API_URL}/users/login`,
         { username, password },
       );
-      // TODO: Set login in redux
+      // TODO: Set session cookie in redux
     } catch (err) {
       // TODO: Indicate failed login and prompt retry
       alert(err.message);
