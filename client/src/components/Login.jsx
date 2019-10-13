@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { getSession } from '../redux/selectors';
+import { setSession } from '../redux/actions';
 import constants from '../constants';
 import Button from './Button';
 import '../styles/login.scss'
@@ -78,4 +81,8 @@ function Login() {
   )
 }
 
-export default Login;
+const mapStateToProps = { getSession };
+
+const mapDispatchToState = { setSession };
+
+export default connect(mapStateToProps, mapDispatchToState)(Login);
