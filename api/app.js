@@ -42,6 +42,9 @@ app.use(cors({
 app.use(session({
   cookie: {
     maxAge: 2629800000, // 1 Month
+    // In order for { sameSite: false, secure: false } to work for development,
+    // The chrome flag 'Cookies without SameSite must be secure' must be disabled
+    // chrome://flags/#cookies-without-same-site-must-be-secure
     sameSite: ENV === 'production' || 'none',
     secure: ENV === 'production',
   },
